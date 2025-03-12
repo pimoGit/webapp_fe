@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom"
 
 
-const BookCard = () => {
+const BookCard = ({ bookProp }) => {
+
+    const { id, title, author, abstract, image } = bookProp;
+
     return (
         <div className="card mb-4">
             <img className="card-img-top"
-                src="http://localhost:3000/img/books/great-gatsby.jpg"
-                alt="descrizione img" />
+                src={image}
+                alt={title} />
             <div className="card-body">
                 <h5 className="card-title">
-                    Titolo del libro
+                    {title}
                 </h5>
                 <address><i>
-                    By nome autore
+                    By {author}
                 </i></address>
                 <p className="card-text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto labore ad sapiente animi incidunt. Sit nihil sed, aliquam rerum ipsam illo optio impedit aperiam molestiae.
+                    {abstract}
                 </p>
-                <Link to="books/2" className="btn btn-primary">See more</Link>
+                <Link to={`books/${id}`} className="btn btn-primary">See more</Link>
             </div>
         </div>
     )

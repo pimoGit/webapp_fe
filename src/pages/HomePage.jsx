@@ -1,7 +1,47 @@
+// uso axios
+import axios from 'axios'
+
+// uso di state e effect
+import { useState, useEffect } from "react"
+
+// import componente card
 import BookCard from './../components/BookCard';
 
 
 const HomePage = () => {
+
+    // settiamo lo stato del componente
+    const [books, setBooks] = useState([]);
+
+    // funzione di fetching dei dati lista libri (index)
+    const fectBooks = () => {
+        axios.get("http://localhost:3000/api/books")
+            .then(
+                res => {
+                    // console.log(res.data);
+                    setBooks(res.data)
+                }
+            )
+            .catch(err => console.log(err)
+            )
+    }
+
+    // fectBooks();
+    useEffect(fectBooks, [])
+
+    // funzione di rendering delle card dei libri
+    const renderBooks = () => {
+        return books.map(
+            book => {
+                return (
+                    <div className="col" key={book.id} >
+                        <BookCard bookProp={book} />
+                    </div>
+                )
+            }
+        )
+    }
+
     return (
         <>
             <h1 className="text-primary">Bool Books</h1>
@@ -9,13 +49,7 @@ const HomePage = () => {
 
             <div className="row row-cols-3 mt-4">
                 {/* Libri qui */}
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
+                {renderBooks()}
             </div>
         </>
     )
