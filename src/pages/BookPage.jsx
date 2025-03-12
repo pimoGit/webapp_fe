@@ -42,7 +42,6 @@ const BookPage = () => {
             review => <ReviewCard key={review.id} reviewProp={review} />
         )
         // console.log(book.reviews);
-
     }
 
     return (

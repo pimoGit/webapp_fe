@@ -7,15 +7,13 @@ const BookCard = ({ bookProp }) => {
 
     return (
         <div className="card mb-4">
-            <img className="card-img-top"
-                src={image}
-                alt={title} />
+            {image && <img className="card-img-top" src={image} alt={title} />}
             <div className="card-body">
                 <h5 className="card-title">
                     {title}
                 </h5>
                 <address><i>
-                    By {author}
+                    By {author || 'Anonymous'}
                 </i></address>
                 <p className="card-text">
                     {abstract}
