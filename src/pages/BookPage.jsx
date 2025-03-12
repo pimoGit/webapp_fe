@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useState, useEffect } from "react"
 
 // importiamo parte LInk del modulo react-router
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 // import del componente di listato
 import ReviewCard from './../components/ReviewCard';
@@ -15,6 +15,9 @@ const BookPage = () => {
 
     // recuperiamo l'id del libro richiesto
     const { id } = useParams();
+
+    // utilizzo per il redirect (useNavigate)
+    const redirect = useNavigate();
 
     // settiamo lo stato del componente
     const [book, setBook] = useState({});
@@ -28,7 +31,11 @@ const BookPage = () => {
                     setBook(res.data)
                 }
             )
-            .catch(err => console.log(err)
+            .catch(err => {
+                console.log(err);
+                if (err.status === 404) redirect("/404")
+            }
+
             )
     }
 
