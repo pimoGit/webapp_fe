@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { useState } from 'react';
 
-const ReviewForm = ({ book_id }) => {
+const ReviewForm = ({ book_id, realoadReviews }) => {
 
     const initialValue = { name: "", text: "", vote: 1 };
 
@@ -22,7 +22,12 @@ const ReviewForm = ({ book_id }) => {
         e.preventDefault();
 
         axios.post(urlEndpoint, formData, { headers: { 'Content-Type': 'application/json' } })
-            .then(setFormData(initialValue))
+            .then(
+                () => {
+                    setFormData(initialValue)
+                    realoadReviews()
+                }
+            )
             .catch(err => console.log(err)
             )
 

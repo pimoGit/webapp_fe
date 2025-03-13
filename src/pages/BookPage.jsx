@@ -85,7 +85,7 @@ const BookPage = () => {
             </section>
 
             <section>
-                <ReviewForm book_id={book.id} />
+                <ReviewForm book_id={book.id} realoadReviews={fectBook} />
             </section>
 
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
