@@ -10,6 +10,9 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 // import del componente di listato
 import ReviewCard from './../components/ReviewCard';
 
+// import del componente di form
+import ReviewForm from './../components/ReviewForm';
+
 
 const BookPage = () => {
 
@@ -79,6 +82,10 @@ const BookPage = () => {
                 </header>
                 {/* Reviews qui */}
                 {renderReviews()}
+            </section>
+
+            <section>
+                <ReviewForm book_id={book.id} />
             </section>
 
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
