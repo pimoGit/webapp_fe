@@ -7,14 +7,20 @@ import { useState, useEffect } from "react"
 // import componente card
 import BookCard from './../components/BookCard';
 
+import { useGlobal } from '../contexts/GlobalContext';
+
+
 
 const HomePage = () => {
+
+    const { setIsLoading } = useGlobal();
 
     // settiamo lo stato del componente
     const [books, setBooks] = useState([]);
 
     // funzione di fetching dei dati lista libri (index)
     const fectBooks = () => {
+        setIsLoading(true);
         axios.get("http://localhost:3000/api/books")
             .then(
                 res => {
@@ -24,6 +30,7 @@ const HomePage = () => {
             )
             .catch(err => console.log(err)
             )
+            .finally(setIsLoading(false))
     }
 
     // fectBooks();

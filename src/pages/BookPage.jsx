@@ -13,8 +13,14 @@ import ReviewCard from './../components/ReviewCard';
 // import del componente di form
 import ReviewForm from './../components/ReviewForm';
 
+import { useGlobal } from '../contexts/GlobalContext';
+
+
 
 const BookPage = () => {
+
+    const { setIsLoading } = useGlobal();
+
 
     // recuperiamo l'id del libro richiesto
     const { id } = useParams();
@@ -25,8 +31,14 @@ const BookPage = () => {
     // settiamo lo stato del componente
     const [book, setBook] = useState({});
 
+    // giusto per simulare un rallentamento della risposta della API
+    // il solo throttling anche molto lento ci mette molto a caricare tutto 
+    // ma la risposta dell'API rimane cmq troppo veloce
+    const loadingFalse = () => { setIsLoading(false) }
+
     // funzione di chiamata all'API per il libro richiesto
     const fectBook = () => {
+        setIsLoading(true);
         axios.get("http://localhost:3000/api/books/" + id)
             .then(
                 res => {
@@ -40,6 +52,7 @@ const BookPage = () => {
             }
 
             )
+            .finally(setTimeout(loadingFalse, 1000))
     }
 
 

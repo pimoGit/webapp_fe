@@ -3,6 +3,9 @@ import HomePage from './pages/HomePage';
 import BookPage from './pages/BookPage';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateBookPage from './pages/CreateBookPage';
+// importiamo il provider globale
+import { GlobalProvider } from './contexts/GlobalContext';
+
 
 
 
@@ -17,16 +20,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<DefaultLayout />}>
-                    <Route index path="/" element={<HomePage />} />
-                    <Route path="/books/create" element={<CreateBookPage />} />
-                    <Route path="/books/:id" element={<BookPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+        <GlobalProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<DefaultLayout />}>
+                        <Route index path="/" element={<HomePage />} />
+                        <Route path="/books/create" element={<CreateBookPage />} />
+                        <Route path="/books/:id" element={<BookPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </GlobalProvider>
     )
 }
 
